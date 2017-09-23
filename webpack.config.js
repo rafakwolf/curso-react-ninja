@@ -11,16 +11,22 @@ module.exports = {
         'webpack/hot/only-dev-server',
         path.join(__dirname, 'src', 'index')
     ],
-    output:{
+    output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
         publicPath: '/static/'
     },
-    plugins:[
+    plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
-    module:{
-        loaders:[{
+    module: {
+        preloaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            include: /src/,
+            loader: 'standard-loader'
+        }],
+        loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,
             include: /src/,
